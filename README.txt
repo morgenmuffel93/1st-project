@@ -22,35 +22,57 @@ destroyGame()
 buildGameOver()
 destroyGameOver()
 
-GAME
-this.balls
-this.time
-this.canvas
-this.gameIsOver
-this.createGoodBall()
-this.createBadBall()
+game.js
+Game () {
+  this.goodBalls // array of good balls
+  this.badBalls // array of bad balls
+  this.time // time it starts counting from
+  this.canvas
+  this.gameIsOver
+  this.createGoodBall() // pushes it to the goodBalls array
+  this.createBadBall() // pushes it to the badBalls array
+}
 
-start()
-  startLoop()
-    startTmer()
-    this.updateAll()
-    this.clearAll()
-    this.drawAll()
-    checkIfMouseOverBall()
-      clearBall()
-    gameOver()
-    destroy()
+Game.prototype.start(
+  buildDom()
+  this.startLoop
+)
+
+Game.prototype.startLoop(
+  ctx
+  loop() {
+    this.startTimer()
+    this.ball.update()
+    this.checkIfMouseOverBall()
+    // add and loose points
+    amItouched() // if true, delete the ball
+    clearBall(i)
+    updateScore()
+
+    this.createGoodBall()
+    this.createBadBall()
+    this.ball.draw()
+    Frame(loop)
+  }
+  Frame(loop)
+}
     
-BALL
-this.x
-this.y
-this.velX
-this.velY
-this.color = [random color from an array]
-this.size = random number between a min and a max
-this.type = good or baddraw()
-update()
-amITouched()
+ball.js(
+  this.canvas
+  this.ctx
+  this.x
+  this.y
+  this.velX
+  this.velY
+  this.color = [random color from an array if good, red if type is bad]
+  this.size = random number between a min and a max
+  this.type = good or badball()
+
+Ball.prototype.update()
+Enemy.prototype.draw()
+Ball.prototype.amITouched()
+)
+
 
 States and States Transitions
 - splashScreen()
@@ -86,9 +108,9 @@ Task
 - Main: destroyGameOver
 - Game: addEventListener
 - Game: loop
+- Ball: create
 - Game: create ball that moves
 - Game: create good and bad balls
-- Ball: create
 - Game: mouseOver + remove
 - Game: score
 - Game: gameOver
