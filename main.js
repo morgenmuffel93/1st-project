@@ -16,9 +16,9 @@ function main() {
   
   function buildSplash() {
     splashScreen = buildDOM(`
-      <main>
-        <h1>Cutting board</h1>
-        <button>Start</button>
+      <main id="main-splash">
+        <h1 id="h1-splash">Cutting board</h1>
+        <button id="btn-splash">Start</button>
       </main>
     `)
 
@@ -49,10 +49,10 @@ function main() {
 
   function buildGameOverScreen() {
     gameOverScreen = buildDOM(`
-      <main>
-        <h1>Game Over</h1>
+      <main id="main-over">
+        <h1 id="h1-over">Game Over</h1>
         <p>You've scored <span class="score"></span></p>
-        <button>Restart</button>
+        <button id="btn-over">Restart</button>
       </main>  
     `);
 
