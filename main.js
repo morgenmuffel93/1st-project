@@ -13,6 +13,7 @@ function main() {
   var gameOverScreen;
   var startButton;
   var restartButton;
+  var canvasElement;
   
   function buildSplash() {
     splashScreen = buildDOM(`
@@ -36,7 +37,7 @@ function main() {
   }
 
   function buildGameScreen() {
-
+    
     var game = new Game();
     game.start();
     game.setGameOverCallback(destroyGameScreen);
@@ -51,7 +52,7 @@ function main() {
     gameOverScreen = buildDOM(`
       <main id="main-over">
         <h1 id="h1-over">Game Over</h1>
-        <p>You've scored <span class="score"></span></p>
+        <p class="scored-par">You've scored <span class="score">0</span> points</p>
         <button id="btn-over">Restart</button>
       </main>  
     `);

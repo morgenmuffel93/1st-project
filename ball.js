@@ -2,13 +2,12 @@ function Ball(canvas) {
   this.colors = ['lightblue','lightpink','yellow','lightgreen'];
   this.canvas = canvas; //ven de game
   this.ctx = canvas.getContext('2d');
-  this.size = Math.floor(Math.random() * (30-10+1)+10);
+  this.size = Math.floor(Math.random() * (20-8+1)+8);
   this.x = Math.floor(Math.random() * ((this.canvas.width-this.size)-this.size+1)+this.size);
   this.y = Math.floor(Math.random() * ((this.canvas.height-this.size)-this.size+1)+this.size);
-  this.velX = 4;
-  this.velY = 4;
+  this.velX = 1;
+  this.velY = 1;
   this.color = this.colors[Math.floor(Math.random()*this.colors.length)];
-  
   this.type = 'good';
 
 }
@@ -18,15 +17,15 @@ Ball.prototype.update = function () {
     this.velX = -(this.velX);
   }
 
-  if ((this.x - this.canvas.size) <= 0) {
+  if ((this.x - this.size) <= 0) {
     this.velX = -(this.velX);
   }
 
-  if ((this.y + this.canvas.size) >= this.canvas.height) {
+  if ((this.y + this.size) >= this.canvas.height) {
     this.velY = -(this.velY);
   }
 
-  if ((this.y - this.canvas.size) <= 0) {
+  if ((this.y - this.size) <= 0) {
     this.velY = -(this.velY);
   }
 

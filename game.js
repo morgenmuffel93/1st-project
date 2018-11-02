@@ -1,7 +1,7 @@
 function Game () {
   this.goodBalls = [];
   this.badBalls = [];
-  this.time = 3;
+  this.time = 1;
   this.gameIsOver
   this.score = 0;
 }
@@ -20,13 +20,14 @@ Game.prototype.start = function() {
 
 document.body.prepend(this.gameScreen);
 this.timeElement = this.gameScreen.querySelector('.time')
-this.canvasElement = this.gameScreen.querySelector('canvas')
+this.canvasElement = document.querySelector('canvas')
+this.ctx = this.canvasElement.getContext('2d');
 
 //this.scoreElement = this.gameScreen.querySelector('.score');
 //this.scoreElement.innerText = this.score;
 
   this.startLoop();
-  //this.startTimer();
+  this.startTimer();
 }
 
 Game.prototype.startLoop = function() {
@@ -35,8 +36,11 @@ Game.prototype.startLoop = function() {
     if (this.goodBalls.length <= 20) {
       this.goodBalls.push(new Ball(this.canvasElement));
     }
-    this.drawAll();
+
     this.updateAll();
+    this.clearAll();
+    this.drawAll();
+
     requestAnimationFrame(loop);
 
   }.bind(this);
@@ -61,6 +65,7 @@ Game.prototype.startTimer = function() {
 }
 
 Game.prototype.drawAll = function() {
+
   this.goodBalls.forEach(function(ball) {
     ball.draw();
   })
@@ -71,6 +76,10 @@ Game.prototype.updateAll = function() {
   this.goodBalls.forEach(function(ball) {
     ball.update();
   })
+}
+
+Game.prototype.clearAll = function() {
+  this.ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
 }
 
 Game.prototype.setGameOverCallback = function(callback) {
