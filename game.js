@@ -36,7 +36,7 @@ Game.prototype.startLoop = function() {
       this.goodBalls.push(new Ball(this.canvasElement));
     }
     this.drawAll();
-    //this.updateAll();
+    this.updateAll();
     requestAnimationFrame(loop);
 
   }.bind(this);
