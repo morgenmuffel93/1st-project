@@ -28,6 +28,7 @@ body {
 #h1-splash {
   font-size: 40px;
 }
+
 #btn-splash {
   font-family: 'Roboto Mono', monospace;
   background: white;
@@ -52,8 +53,8 @@ body {
 
 canvas {
   border: 1px solid;
-  height: 400px;
-  width: 800px;
+  height: 500px;
+  width: 1500px;
   background-color: lightgray;
 }
 

@@ -32,16 +32,16 @@ this.canvasElement = this.gameScreen.querySelector('canvas')
 Game.prototype.startLoop = function() {
 
   var loop = function() {
-    if (this.goodBalls.length <= 30) {
+    if (this.goodBalls.length <= 20) {
       this.goodBalls.push(new Ball(this.canvasElement));
     }
     this.drawAll();
     //this.updateAll();
     requestAnimationFrame(loop);
+
   }.bind(this);
-  loop();
 
-
+    loop();
 }
 
 Game.prototype.startTimer = function() {

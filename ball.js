@@ -7,6 +7,7 @@ function Ball(canvas) {
   this.y = Math.floor(Math.random() * ((this.canvas.height-this.size)-this.size+1)+this.size);
   this.velX
   this.velY
+  this.color = this.colors[Math.floor(Math.random()*this.colors.length)];
   
   this.type = 'good';
 
@@ -17,8 +18,7 @@ Ball.prototype.update = function () {
 }
 
 Ball.prototype.draw = function () {
-  var color = this.colors[Math.floor(Math.random()*this.colors.length)];
-  this.ctx.fillStyle = color;
+  this.ctx.fillStyle = this.color;
   this.ctx.beginPath();
   this.ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
   this.ctx.fill();
