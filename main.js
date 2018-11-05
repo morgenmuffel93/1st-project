@@ -30,6 +30,7 @@ function main() {
     startButton = document.querySelector('button');
 
     startButton.addEventListener('click', destroySplash);
+    
   }
 
   function destroySplash() {
