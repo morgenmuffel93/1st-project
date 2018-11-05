@@ -14,8 +14,8 @@ Game.prototype.start = function() {
   this.gameScreen = buildDOM(`
   <main id="main-game">
     <header id="header-game">
-      <p>Score: <span class="score"></span></p>
-      <p>Time: <span class="time"></span></p>
+      <p class="text-game">Score: <span class="score"></span></p>
+      <p class="text-game">Time: <span class="time"></span></p>
     </header>
     <canvas width="800px" height="400px"></canvas>
   </main>
@@ -50,7 +50,7 @@ Game.prototype.startLoop = function() {
     if (this.bombBalls.length < 2) {
       this.bombBalls.push(new Ball(this.canvasElement, 'bomb'));
     }
-    //this.isColliding();
+
     this.updateAll();
     this.clearAll();
     this.drawAll();
@@ -131,7 +131,7 @@ Game.prototype.isCollision = function(event) {
   
     if (distance < ball.size) {
       this.badBalls.splice(index, 1);
-      this.score--;
+      this.score = this.score - 2;
     }
     }.bind(this));
 

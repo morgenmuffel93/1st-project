@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Electrolize|VT323');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Electrolize|VT323|Indie+Flower');
 
 
 html {
@@ -27,11 +27,18 @@ button {
   width: 100%;
   padding-top: 218px;
   padding-bottom: 218px;
-  background-image: url(images/splash-background.svg)
+  background-image: url(images/splash-background.jpeg);
+  background-size: contain;
+
 }
 
 #h1-splash {
-  font-size: 40px;
+  font-size: 60px;
+  font-family: 'Indie Flower', cursive;
+  color: yellow;
+  font-weight: bold;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 
 #btn-splash {
@@ -43,6 +50,13 @@ button {
   border-style: none;
 }
 
+.text-splash {
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
 #btn-splash:hover {
   background-color:  #fcffbf;
 }
@@ -52,8 +66,14 @@ button {
   flex-direction: row-reverse;
   align-items: center;
   justify-content: space-around;
-  background-color: #92bdcc;
+  background-image: url(images/game-background.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
   padding: 30px 100px 150px 30px;
+}
+
+.text-game {
+  color: white;
 }
 
 canvas {

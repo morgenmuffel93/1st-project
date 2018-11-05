@@ -18,7 +18,8 @@ function main() {
   function buildSplash() {
     splashScreen = buildDOM(`
       <main id="main-splash">
-        <h1 id="h1-splash">Cutting board</h1>
+        <h1 id="h1-splash">Homer is hungry!</h1>
+        <p class="text-splash">Help him catch the foods he enjoys while avoiding healthy items...<br>...and Flanders. Stupid Flanders.</p>
         <button id="btn-splash">Start</button>
       </main>
     `)
