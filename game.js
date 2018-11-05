@@ -1,10 +1,13 @@
 function Game () {
+  this.player = null;
   this.goodBalls = [];
   this.badBalls = [];
-  this.time = 1;
+  this.bombBalls = [];
+  this.time = 10;
   this.gameIsOver
   this.score = 0;
 }
+
 
 Game.prototype.start = function() {
 
@@ -14,17 +17,17 @@ Game.prototype.start = function() {
       <p>Score: <span class="score"></span></p>
       <p>Time: <span class="time"></span></p>
     </header>
-    <canvas></canvas>
+    <canvas width="800px" height="400px"></canvas>
   </main>
 `);
 
-document.body.prepend(this.gameScreen);
-this.timeElement = this.gameScreen.querySelector('.time')
-this.canvasElement = document.querySelector('canvas')
-this.ctx = this.canvasElement.getContext('2d');
+  document.body.prepend(this.gameScreen);
+  this.timeElement = this.gameScreen.querySelector('.time')
+  this.canvasElement = document.querySelector('canvas')
+  this.ctx = this.canvasElement.getContext('2d');
+  
+  this.scoreElement = this.gameScreen.querySelector('.score');
 
-//this.scoreElement = this.gameScreen.querySelector('.score');
-//this.scoreElement.innerText = this.score;
 
   this.startLoop();
   this.startTimer();
@@ -32,11 +35,22 @@ this.ctx = this.canvasElement.getContext('2d');
 
 Game.prototype.startLoop = function() {
 
-  var loop = function() {
-    if (this.goodBalls.length <= 20) {
-      this.goodBalls.push(new Ball(this.canvasElement));
+  this.canvasElement.addEventListener('mousemove', this.isCollision.bind(this));
+  
+    var loop = function() {
+    this.scoreElement.innerText = this.score;
+    if (this.goodBalls.length < 13) {
+      this.goodBalls.push(new Ball(this.canvasElement, 'good'));
+    }
+  
+    if (this.badBalls.length < 8) {
+      this.badBalls.push(new Ball(this.canvasElement, 'bad'));
     }
 
+    if (this.bombBalls.length < 2) {
+      this.bombBalls.push(new Ball(this.canvasElement, 'bomb'));
+    }
+    //this.isColliding();
     this.updateAll();
     this.clearAll();
     this.drawAll();
@@ -69,6 +83,12 @@ Game.prototype.drawAll = function() {
   this.goodBalls.forEach(function(ball) {
     ball.draw();
   })
+  this.badBalls.forEach(function(ball) {
+    ball.draw();
+  })
+  this.bombBalls.forEach(function(ball) {
+    ball.draw();
+  })
 
 }
 
@@ -76,10 +96,63 @@ Game.prototype.updateAll = function() {
   this.goodBalls.forEach(function(ball) {
     ball.update();
   })
+  this.badBalls.forEach(function(ball) {
+    ball.update();
+  })
+  this.bombBalls.forEach(function(ball) {
+    ball.update();
+  })
 }
 
 Game.prototype.clearAll = function() {
   this.ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+}
+
+Game.prototype.isCollision = function(event) {
+  var position = getMousePos(this.canvasElement, event);
+  console.log("mouse: "+position.x, position.y);
+
+  this.goodBalls.forEach(function(ball, index){
+  console.log("ball: "+ball.x,ball.y);
+  var dx = position.x - ball.x;
+  var dy = position.y - ball.y;
+  var distance = Math.sqrt(dx * dx + dy * dy);
+
+  if (distance < ball.size) {
+    this.goodBalls.splice(index, 1);
+    this.score++;
+  }
+  }.bind(this));
+
+  this.badBalls.forEach(function(ball, index){
+    var dx = position.x - ball.x;
+    var dy = position.y - ball.y;
+    var distance = Math.sqrt(dx * dx + dy * dy);
+  
+    if (distance < ball.size) {
+      this.badBalls.splice(index, 1);
+      this.score--;
+    }
+    }.bind(this));
+
+    this.bombBalls.forEach(function(ball, index){
+      var dx = position.x - ball.x;
+      var dy = position.y - ball.y;
+      var distance = Math.sqrt(dx * dx + dy * dy);
+    
+      if (distance < ball.size) {
+        this.finishGame();
+      }
+      }.bind(this));
+
+}
+
+function getMousePos(canvas, evt) {
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: evt.clientX - rect.left,
+    y: evt.clientY - rect.top
+  };
 }
 
 Game.prototype.setGameOverCallback = function(callback) {
@@ -90,3 +163,5 @@ Game.prototype.finishGame = function() {
   this.gameScreen.remove();
   this.gameOverCallback();
 }
+
+

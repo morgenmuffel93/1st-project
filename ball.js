@@ -1,14 +1,22 @@
-function Ball(canvas) {
+function Ball(canvas, type) {
   this.colors = ['lightblue','lightpink','yellow','lightgreen'];
   this.canvas = canvas; //ven de game
   this.ctx = canvas.getContext('2d');
-  this.size = Math.floor(Math.random() * (20-8+1)+8);
+  this.size = Math.floor(Math.random() * (50-40+1)+40);
   this.x = Math.floor(Math.random() * ((this.canvas.width-this.size)-this.size+1)+this.size);
   this.y = Math.floor(Math.random() * ((this.canvas.height-this.size)-this.size+1)+this.size);
-  this.velX = 1;
-  this.velY = 1;
+  this.velX = 2;
+  this.velY = 2;
   this.color = this.colors[Math.floor(Math.random()*this.colors.length)];
-  this.type = 'good';
+  this.type = type;
+  this.goodBallImage = new Image();
+  this.badBallImage = new Image();
+  this.bombBallImage = new Image();
+  this.goodBallsChoices = ["images/donut1.png","images/duff1.png","images/burger1.png","images/pizza1.png"];
+  this.badBallsChoices = ["images/salad1.png","images/applenew.png"];
+  this.goodBallImage.src = this.goodBallsChoices[Math.floor(Math.random() * this.goodBallsChoices.length)];
+  this.badBallImage.src = this.badBallsChoices[Math.floor(Math.random() * this.badBallsChoices.length)];
+  this.bombBallImage.src = 'images/flanders1.png';
 
 }
 
@@ -34,24 +42,22 @@ Ball.prototype.update = function () {
 }
 
 Ball.prototype.draw = function () {
-  this.ctx.fillStyle = this.color;
   this.ctx.beginPath();
   this.ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-  this.ctx.fill();
-}
+  
+  if (this.type === 'good') {
+    //this.ctx.fillStyle = this.color;
+    //this.ctx.fill();
+    this.ctx.drawImage(this.goodBallImage, this.x, this.y, this.size, this.size);
 
-Ball.prototype.amITouched = function () {
+  } else if (this.type === 'bad') {
+    //this.ctx.fillStyle = 'red';
+    //this.ctx.fill();
+    this.ctx.drawImage(this.badBallImage, this.x, this.y, this.size, this.size);
 
-
-}
-
-Ball.prototype.createGoodBall = function () {
-
-
-}
-
-Ball.prototype.createBadBall = function () {
-
-
+  } else if (this.type === 'bomb') {
+    this.ctx.fillStyle = 'black';
+    this.ctx.drawImage(this.bombBallImage, this.x, this.y, this.size, this.size);
+  }
 }
 

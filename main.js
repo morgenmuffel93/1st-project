@@ -52,16 +52,18 @@ function main() {
     gameOverScreen = buildDOM(`
       <main id="main-over">
         <h1 id="h1-over">Game Over</h1>
-        <p class="scored-par">You've scored <span class="score">0</span> points</p>
+        <p class="scored-par">You've scored <span class="score"></span> points</p>
         <button id="btn-over">Restart</button>
       </main>  
     `);
 
     document.body.prepend(gameOverScreen);
+
     //scoreElement = document.querySelector('.score');
     //scoreElement.innerText = game.score;
     restartButton = document.querySelector('button');
     restartButton.addEventListener('click', destroyGameOverScreen)
+    
 
   }
 
