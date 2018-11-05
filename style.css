@@ -28,7 +28,7 @@ button {
   padding-top: 218px;
   padding-bottom: 218px;
   background-image: url(images/splash-background.jpeg);
-  background-size: contain;
+  background-size: cover;
 
 }
 
@@ -78,7 +78,8 @@ button {
 
 canvas {
   border: 1px solid white;
-  background-color: #effbff;
+  background-image: url(images/simpsons-kitchen.0.0.jpg);
+  background-opacity: 0.2;
 }
 
 #header-game {
@@ -99,6 +100,17 @@ canvas {
   padding-top: 218px;
   padding-bottom: 218px;
   background-image: url(images/splash-background.svg)
+}
+
+#main-flanders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding-top: 218px;
+  padding-bottom: 218px;
+  background-image: url(images/220px-Ned_Flanders.png)
 }
 
 

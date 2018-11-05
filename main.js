@@ -11,6 +11,7 @@ function main() {
   var splashScreen;
   var gameScreen;
   var gameOverScreen;
+  var gameFlandersScreen;
   var startButton;
   var restartButton;
   var canvasElement;
@@ -42,6 +43,7 @@ function main() {
     var game = new Game();
     game.start();
     game.setGameOverCallback(destroyGameScreen);
+    //game.setGameFlandersCallback(destroyGameScreen);
 
   }
 
@@ -49,11 +51,15 @@ function main() {
     buildGameOverScreen();
   }
 
+  /** function destroyGameFlandersScreen() {
+    buildGameFlandersScreen();
+  }*/
+
   function buildGameOverScreen() {
     gameOverScreen = buildDOM(`
       <main id="main-over">
         <h1 id="h1-over">Game Over</h1>
-        <p class="scored-par">You've scored <span class="score"></span> points</p>
+        <p class="scored-par"><span class="score"></span></p>
         <button id="btn-over">Restart</button>
       </main>  
     `);
@@ -68,11 +74,36 @@ function main() {
 
   }
 
+  /** function buildGameFlandersScreen() {
+    gameFlandersScreen = buildDOM(`
+      <main id="main-flanders">
+        <h1 id="h1-over">Game Over</h1>
+        <p class="flanders-text">Knock knock! It's your favorite neighbour...</p>
+        <button id="btn-over">Restart</button>
+      </main>  
+    `);
+
+    document.body.prepend(gameFlandersScreen);
+
+    //scoreElement = document.querySelector('.score');
+    //scoreElement.innerText = game.score;
+    restartButton = document.querySelector('button');
+    restartButton.addEventListener('click', destroyGameFlandersScreen)
+    
+
+  }*/
+
   function destroyGameOverScreen() {
     gameOverScreen.remove();
     restartButton.removeEventListener('click', destroyGameOverScreen)
     buildGameScreen();
   }
+
+  /* function destroyGameFlandersScreen() {
+    gameFlandersScreen.remove();
+    restartButton.removeEventListener('click', destroyGameFlandersScreen)
+    buildGameScreen();
+  }*/
 
   buildSplash();
 

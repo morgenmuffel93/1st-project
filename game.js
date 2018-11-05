@@ -3,7 +3,7 @@ function Game () {
   this.goodBalls = [];
   this.badBalls = [];
   this.bombBalls = [];
-  this.time = 10;
+  this.time = 20;
   this.gameIsOver
   this.score = 0;
 }
@@ -17,7 +17,7 @@ Game.prototype.start = function() {
       <p class="text-game">Score: <span class="score"></span></p>
       <p class="text-game">Time: <span class="time"></span></p>
     </header>
-    <canvas width="800px" height="400px"></canvas>
+    <canvas width="800px" height="500px"></canvas>
   </main>
 `);
 
@@ -39,15 +39,15 @@ Game.prototype.startLoop = function() {
   
     var loop = function() {
     this.scoreElement.innerText = this.score;
-    if (this.goodBalls.length < 13) {
+    if (this.goodBalls.length < 10) {
       this.goodBalls.push(new Ball(this.canvasElement, 'good'));
     }
   
-    if (this.badBalls.length < 8) {
+    if (this.badBalls.length < 5) {
       this.badBalls.push(new Ball(this.canvasElement, 'bad'));
     }
 
-    if (this.bombBalls.length < 2) {
+    if (this.bombBalls.length < 1) {
       this.bombBalls.push(new Ball(this.canvasElement, 'bomb'));
     }
 
@@ -77,6 +77,14 @@ Game.prototype.startTimer = function() {
 
   }.bind(this), 1000)
 }
+
+//Game.prototype.changeSpeed = function () {
+  //this.goodBalls.forEach(function(ball) {
+    //setTimeout(this.ball.incrementSpeed,10000);
+  //}
+//}
+
+
 
 Game.prototype.drawAll = function() {
 
@@ -159,9 +167,20 @@ Game.prototype.setGameOverCallback = function(callback) {
   this.gameOverCallback = callback;
 }
 
+
 Game.prototype.finishGame = function() {
   this.gameScreen.remove();
   this.gameOverCallback();
 }
+
+/* Game.prototype.setGameFlandersCallback = function(callback) {
+  this.gameFlandersCallback = callback;
+}
+
+Game.prototype.finishGameFlanders = function() {
+  this.gameScreen.remove();
+  this.gameFlandersCallback();
+}*/
+
 
 

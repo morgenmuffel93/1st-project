@@ -2,7 +2,7 @@ function Ball(canvas, type) {
   this.colors = ['lightblue','lightpink','yellow','lightgreen'];
   this.canvas = canvas; //ven de game
   this.ctx = canvas.getContext('2d');
-  this.size = Math.floor(Math.random() * (50-40+1)+40);
+  this.size = Math.floor(Math.random() * (70-50+1)+50);
   this.x = Math.floor(Math.random() * ((this.canvas.width-this.size)-this.size+1)+this.size);
   this.y = Math.floor(Math.random() * ((this.canvas.height-this.size)-this.size+1)+this.size);
   this.velX = 2;
@@ -13,7 +13,7 @@ function Ball(canvas, type) {
   this.badBallImage = new Image();
   this.bombBallImage = new Image();
   this.goodBallsChoices = ["images/donut1.png","images/duff.png","images/burger1.png","images/pizza1.png"];
-  this.badBallsChoices = ["images/salad1.png","images/apple.png","images/broccoli.png"];
+  this.badBallsChoices = ["images/salad1.png","images/apple.png","images/broccoli.png","images/smoothie.png"];
   this.goodBallImage.src = this.goodBallsChoices[Math.floor(Math.random() * this.goodBallsChoices.length)];
   this.badBallImage.src = this.badBallsChoices[Math.floor(Math.random() * this.badBallsChoices.length)];
   this.bombBallImage.src = 'images/flanders1.png';
@@ -59,5 +59,10 @@ Ball.prototype.draw = function () {
     this.ctx.fillStyle = 'black';
     this.ctx.drawImage(this.bombBallImage, this.x, this.y, this.size, this.size);
   }
+}
+
+Ball.prototype.incrementSpeed = function() {
+  ball.velX = 3;
+  ball.velY = 3;
 }
 
