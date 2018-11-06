@@ -1,12 +1,14 @@
-function Ball(canvas, type) {
+'use strict'
+
+function Ball(canvas, type, velocity) {
   this.colors = ['lightblue','lightpink','yellow','lightgreen'];
   this.canvas = canvas; //ven de game
   this.ctx = canvas.getContext('2d');
-  this.size = Math.floor(Math.random() * (70-50+1)+50);
+  this.size = Math.floor(Math.random() * (70-70+1)+70);
   this.x = Math.floor(Math.random() * ((this.canvas.width-this.size)-this.size+1)+this.size);
   this.y = Math.floor(Math.random() * ((this.canvas.height-this.size)-this.size+1)+this.size);
-  this.velX = 2;
-  this.velY = 2;
+  this.velX = velocity;
+  this.velY = velocity;
   this.color = this.colors[Math.floor(Math.random()*this.colors.length)];
   this.type = type;
   this.goodBallImage = new Image();
@@ -17,7 +19,6 @@ function Ball(canvas, type) {
   this.goodBallImage.src = this.goodBallsChoices[Math.floor(Math.random() * this.goodBallsChoices.length)];
   this.badBallImage.src = this.badBallsChoices[Math.floor(Math.random() * this.badBallsChoices.length)];
   this.bombBallImage.src = 'images/flanders1.png';
-
 }
 
 Ball.prototype.update = function () {
@@ -56,7 +57,7 @@ Ball.prototype.draw = function () {
     this.ctx.drawImage(this.badBallImage, this.x, this.y, this.size, this.size);
 
   } else if (this.type === 'bomb') {
-    this.ctx.fillStyle = 'black';
+    //this.ctx.fillStyle = 'black';
     this.ctx.drawImage(this.bombBallImage, this.x, this.y, this.size, this.size);
   }
 }

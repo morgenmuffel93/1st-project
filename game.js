@@ -1,16 +1,22 @@
+'use strict'
+
 function Game () {
-  this.player = null;
   this.goodBalls = [];
   this.badBalls = [];
   this.bombBalls = [];
+  this.dotsArray = [];
   this.time = 20;
-  this.gameIsOver
+  this.gameIsOver;
   this.score = 0;
+  this.isDrawing = false;
+  this.mousex = 0;
+  this.mousey = 0;
+  this.ballsVelocity = 2;
 }
 
 
 Game.prototype.start = function() {
-
+  window.setTimeout(this.increaseVelocity(),10000);
   this.gameScreen = buildDOM(`
   <main id="main-game">
     <header id="header-game">
@@ -25,35 +31,43 @@ Game.prototype.start = function() {
   this.timeElement = this.gameScreen.querySelector('.time')
   this.canvasElement = document.querySelector('canvas')
   this.ctx = this.canvasElement.getContext('2d');
-  
   this.scoreElement = this.gameScreen.querySelector('.score');
-
-
+  
   this.startLoop();
   this.startTimer();
 }
 
 Game.prototype.startLoop = function() {
 
-  this.canvasElement.addEventListener('mousemove', this.isCollision.bind(this));
-  
+  //this.canvasElement.addEventListener('mousedown', this.handleMouseDown.bind(this));
+  this.canvasElement.addEventListener('mousemove', this.handleMouseMove.bind(this));
+  //this.canvasElement.addEventListener('mouseup', this.handleMouseUp.bind(this));
+
     var loop = function() {
     this.scoreElement.innerText = this.score;
-    if (this.goodBalls.length < 10) {
-      this.goodBalls.push(new Ball(this.canvasElement, 'good'));
+    if (this.goodBalls.length < 6) {
+      this.goodBalls.push(new Ball(this.canvasElement, 'good', this.ballsVelocity));
     }
   
-    if (this.badBalls.length < 5) {
-      this.badBalls.push(new Ball(this.canvasElement, 'bad'));
+    if (this.badBalls.length < 3) {
+      this.badBalls.push(new Ball(this.canvasElement, 'bad', this.ballsVelocity));
     }
 
     if (this.bombBalls.length < 1) {
-      this.bombBalls.push(new Ball(this.canvasElement, 'bomb'));
+      this.bombBalls.push(new Ball(this.canvasElement, 'bomb', this.ballsVelocity));
     }
+
+    if (this.dotsArray.length < 30000) {
+      this.dotsArray.push(new Line(this.canvasElement, this.mousex, this.mousey))
+    }
+ 
 
     this.updateAll();
     this.clearAll();
     this.drawAll();
+    /*if (this.isDrawing) {
+      dot.drawDot(this.mousex, this.mousey);
+    }*/
 
     requestAnimationFrame(loop);
 
@@ -78,16 +92,15 @@ Game.prototype.startTimer = function() {
   }.bind(this), 1000)
 }
 
-//Game.prototype.changeSpeed = function () {
-  //this.goodBalls.forEach(function(ball) {
-    //setTimeout(this.ball.incrementSpeed,10000);
-  //}
-//}
-
-
+Game.prototype.increaseVelocity = function () {
+  if (this.time === 20) {
+    this.ballsVelocity = 3;
+  } else if (this.time === 10) {
+    this.ballsVelocity = 4;
+  }
+}
 
 Game.prototype.drawAll = function() {
-
   this.goodBalls.forEach(function(ball) {
     ball.draw();
   })
@@ -97,7 +110,11 @@ Game.prototype.drawAll = function() {
   this.bombBalls.forEach(function(ball) {
     ball.draw();
   })
-
+  if (this.dotsArray.length > 0) {
+    this.dotsArray.forEach(function(dot){
+    dot.drawDot(dot.x,dot.y)
+    })
+  }
 }
 
 Game.prototype.updateAll = function() {
@@ -116,12 +133,8 @@ Game.prototype.clearAll = function() {
   this.ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
 }
 
-Game.prototype.isCollision = function(event) {
-  var position = getMousePos(this.canvasElement, event);
-  console.log("mouse: "+position.x, position.y);
-
+Game.prototype.isCollision = function(position) {
   this.goodBalls.forEach(function(ball, index){
-  console.log("ball: "+ball.x,ball.y);
   var dx = position.x - ball.x;
   var dy = position.y - ball.y;
   var distance = Math.sqrt(dx * dx + dy * dy);
@@ -139,17 +152,17 @@ Game.prototype.isCollision = function(event) {
   
     if (distance < ball.size) {
       this.badBalls.splice(index, 1);
-      this.score = this.score - 2;
+      this.score = this.score - 5;
     }
     }.bind(this));
 
-    this.bombBalls.forEach(function(ball, index){
+    this.bombBalls.forEach(function(ball){
       var dx = position.x - ball.x;
       var dy = position.y - ball.y;
       var distance = Math.sqrt(dx * dx + dy * dy);
     
       if (distance < ball.size) {
-        this.finishGame();
+        this.finishGameFlanders();
       }
       }.bind(this));
 
@@ -163,6 +176,31 @@ function getMousePos(canvas, evt) {
   };
 }
 
+/* Game.prototype.handleMouseDown = function() {
+  this.isDrawing = true;
+};*/
+
+Game.prototype.handleMouseMove = function(event) {
+  this.isDrawing = true;
+  if (this.isDrawing) {
+    var position = getMousePos(this.canvasElement, event);
+    this.mousex = position.x;
+    this.mousey = position.y;
+    this.isCollision(position);
+  }
+};
+
+/* Game.prototype.handleMouseUp = function() {
+  this.isDrawing = false;
+  this.updateLine();
+  //line.ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+};*/
+
+Game.prototype.updateLine = function() {
+    this.dotsArray = 0;
+};
+
+
 Game.prototype.setGameOverCallback = function(callback) {
   this.gameOverCallback = callback;
 }
@@ -173,14 +211,15 @@ Game.prototype.finishGame = function() {
   this.gameOverCallback();
 }
 
-/* Game.prototype.setGameFlandersCallback = function(callback) {
+
+Game.prototype.setGameFlandersCallback = function(callback) {
   this.gameFlandersCallback = callback;
 }
 
 Game.prototype.finishGameFlanders = function() {
   this.gameScreen.remove();
   this.gameFlandersCallback();
-}*/
+}
 
 
 

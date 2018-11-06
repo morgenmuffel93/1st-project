@@ -30,7 +30,7 @@ function main() {
     startButton = document.querySelector('button');
 
     startButton.addEventListener('click', destroySplash);
-    
+
   }
 
   function destroySplash() {
@@ -44,7 +44,7 @@ function main() {
     var game = new Game();
     game.start();
     game.setGameOverCallback(destroyGameScreen);
-    //game.setGameFlandersCallback(destroyGameScreen);
+    game.setGameFlandersCallback(destroyGameScreen);
 
   }
 
@@ -52,9 +52,9 @@ function main() {
     buildGameOverScreen();
   }
 
-  /** function destroyGameFlandersScreen() {
+  function destroyGameFlandersScreen() {
     buildGameFlandersScreen();
-  }*/
+  }
 
   function buildGameOverScreen() {
     gameOverScreen = buildDOM(`
@@ -71,11 +71,9 @@ function main() {
     //scoreElement.innerText = game.score;
     restartButton = document.querySelector('button');
     restartButton.addEventListener('click', destroyGameOverScreen)
-    
-
   }
 
-  /** function buildGameFlandersScreen() {
+  function buildGameFlandersScreen() {
     gameFlandersScreen = buildDOM(`
       <main id="main-flanders">
         <h1 id="h1-over">Game Over</h1>
@@ -92,7 +90,7 @@ function main() {
     restartButton.addEventListener('click', destroyGameFlandersScreen)
     
 
-  }*/
+  }
 
   function destroyGameOverScreen() {
     gameOverScreen.remove();
@@ -100,11 +98,11 @@ function main() {
     buildGameScreen();
   }
 
-  /* function destroyGameFlandersScreen() {
+  function destroyGameFlandersScreen() {
     gameFlandersScreen.remove();
     restartButton.removeEventListener('click', destroyGameFlandersScreen)
     buildGameScreen();
-  }*/
+  }
 
   buildSplash();
 

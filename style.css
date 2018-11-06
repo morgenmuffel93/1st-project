@@ -29,7 +29,6 @@ button {
   padding-bottom: 218px;
   background-image: url(images/splash-background.jpeg);
   background-size: cover;
-
 }
 
 #h1-splash {
@@ -41,6 +40,8 @@ button {
   padding-bottom: 0px;
 }
 
+
+
 #btn-splash {
   font-family: 'Roboto Mono', monospace;
   background: white;
@@ -48,6 +49,7 @@ button {
   padding: 0px 30px;
   width: 20%;
   border-style: none;
+  color: rgb(146, 212, 247)
 }
 
 .text-splash {
@@ -79,7 +81,6 @@ button {
 canvas {
   border: 1px solid white;
   background-image: url(images/simpsons-kitchen.0.0.jpg);
-  background-opacity: 0.2;
 }
 
 #header-game {
@@ -99,7 +100,7 @@ canvas {
   width: 100%;
   padding-top: 218px;
   padding-bottom: 218px;
-  background-image: url(images/splash-background.svg)
+  background-image: url(images/splash-background.jpeg);
 }
 
 #main-flanders {
@@ -115,12 +116,13 @@ canvas {
 
 
 #h1-over {
-  font-size: 50px;
+  font-size: 60px;
   margin: 3px 3px 3px 3px;
-  color: #852fc6;
+  font-family: 'Indie Flower', cursive;
+  color: yellow;
   font-weight: bold;
-
 }
+
 
 #btn-over {
   font-family: 'Roboto Mono', monospace;
@@ -129,6 +131,7 @@ canvas {
   padding: 0px 30px;
   width: 20%;
   border-style: none;
+  color: rgb(146, 212, 247)
 }
 
 #btn-over:hover {
