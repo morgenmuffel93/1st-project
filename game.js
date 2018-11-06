@@ -43,7 +43,12 @@ Game.prototype.startLoop = function() {
   this.canvasElement.addEventListener('mousemove', this.handleMouseMove.bind(this));
   //this.canvasElement.addEventListener('mouseup', this.handleMouseUp.bind(this));
 
+    
+
     var loop = function() {
+      if (Math.random() > 0.10) {
+        this.updateDots(this.dotsArray);
+      }
     this.scoreElement.innerText = this.score;
     if (this.goodBalls.length < 6) {
       this.goodBalls.push(new Ball(this.canvasElement, 'good', this.ballsVelocity));
@@ -65,9 +70,7 @@ Game.prototype.startLoop = function() {
     this.updateAll();
     this.clearAll();
     this.drawAll();
-    /*if (this.isDrawing) {
-      dot.drawDot(this.mousex, this.mousey);
-    }*/
+
 
     requestAnimationFrame(loop);
 
@@ -127,6 +130,7 @@ Game.prototype.updateAll = function() {
   this.bombBalls.forEach(function(ball) {
     ball.update();
   })
+
 }
 
 Game.prototype.clearAll = function() {
@@ -199,6 +203,10 @@ Game.prototype.handleMouseMove = function(event) {
 Game.prototype.updateLine = function() {
     this.dotsArray = 0;
 };
+
+Game.prototype.updateDots = function(array) {
+  array.splice(0, 1);
+}
 
 
 Game.prototype.setGameOverCallback = function(callback) {
