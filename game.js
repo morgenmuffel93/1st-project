@@ -6,7 +6,7 @@ function Game () {
   this.bombBalls = [];
   this.dotsArray = [];
   this.time = 20;
-  this.gameIsOver;
+  this.gameIsOver = false;
   this.score = 0;
   this.isDrawing = false;
   this.mousex = 0;
@@ -24,6 +24,7 @@ Game.prototype.start = function() {
       <p class="text-game">Time: <span class="time"></span></p>
     </header>
     <canvas width="800px" height="500px"></canvas>
+    <audio class="soundtrack"><source src="audio/The Simpsons.mp3" type="audio/mp3" /></audio>
   </main>
 `);
 
@@ -62,7 +63,7 @@ Game.prototype.startLoop = function() {
       this.bombBalls.push(new Ball(this.canvasElement, 'bomb', this.ballsVelocity));
     }
 
-    if (this.dotsArray.length < 30000) {
+    if (this.dotsArray.length < 20) {
       this.dotsArray.push(new Line(this.canvasElement, this.mousex, this.mousey))
     }
  
@@ -71,8 +72,9 @@ Game.prototype.startLoop = function() {
     this.clearAll();
     this.drawAll();
 
-
-    requestAnimationFrame(loop);
+    if (!this.gameIsOver) {
+      requestAnimationFrame(loop);
+    }
 
   }.bind(this);
 
@@ -87,8 +89,9 @@ Game.prototype.startTimer = function() {
     this.time--;
     this.timeElement.innerText = this.time;
 
-    if (this.time === 0) {
+    if (this.time ===  0) {
       clearInterval(this.intervalId);
+      this.gameIsOver = true;
       this.finishGame();
     }
 
@@ -166,6 +169,8 @@ Game.prototype.isCollision = function(position) {
       var distance = Math.sqrt(dx * dx + dy * dy);
     
       if (distance < ball.size) {
+        clearInterval(this.intervalId);
+        this.gameIsOver = true;
         this.finishGameFlanders();
       }
       }.bind(this));
@@ -228,6 +233,7 @@ Game.prototype.finishGameFlanders = function() {
   this.gameScreen.remove();
   this.gameFlandersCallback();
 }
+
 
 
 

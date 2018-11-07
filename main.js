@@ -14,6 +14,7 @@ function main() {
   var gameFlandersScreen;
   var startButton;
   var restartButton;
+  var restartButtonFlanders;
   var canvasElement;
   
   function buildSplash() {
@@ -43,13 +44,9 @@ function main() {
     
     var game = new Game();
     game.start();
-    game.setGameOverCallback(destroyGameScreen);
-    game.setGameFlandersCallback(destroyGameScreen);
+    game.setGameOverCallback(buildGameOverScreen);
+    game.setGameFlandersCallback(buildGameFlandersScreen);
 
-  }
-
-  function destroyGameScreen() {
-    buildGameOverScreen();
   }
 
   function destroyGameFlandersScreen() {
@@ -86,8 +83,8 @@ function main() {
 
     //scoreElement = document.querySelector('.score');
     //scoreElement.innerText = game.score;
-    restartButton = document.querySelector('button');
-    restartButton.addEventListener('click', destroyGameFlandersScreen)
+    restartButtonFlanders = document.querySelector('button');
+    restartButtonFlanders.addEventListener('click', destroyGameFlandersScreen)
     
 
   }
@@ -100,7 +97,7 @@ function main() {
 
   function destroyGameFlandersScreen() {
     gameFlandersScreen.remove();
-    restartButton.removeEventListener('click', destroyGameFlandersScreen)
+    restartButtonFlanders.removeEventListener('click', destroyGameFlandersScreen)
     buildGameScreen();
   }
 

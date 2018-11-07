@@ -14,7 +14,7 @@ function Ball(canvas, type, velocity) {
   this.goodBallImage = new Image();
   this.badBallImage = new Image();
   this.bombBallImage = new Image();
-  this.goodBallsChoices = ["images/donut1.png","images/duff.png","images/burger1.png","images/pizza1.png"];
+  this.goodBallsChoices = ["images/newdonut.png","images/duff.png","images/burger1.png","images/pizza1.png"];
   this.badBallsChoices = ["images/salad1.png","images/apple.png","images/broccoli.png","images/smoothie.png"];
   this.goodBallImage.src = this.goodBallsChoices[Math.floor(Math.random() * this.goodBallsChoices.length)];
   this.badBallImage.src = this.badBallsChoices[Math.floor(Math.random() * this.badBallsChoices.length)];
