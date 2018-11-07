@@ -111,7 +111,9 @@ canvas {
   width: 100%;
   padding-top: 218px;
   padding-bottom: 218px;
-  background-image: url(images/220px-Ned_Flanders.png)
+  background-image: url(images/220px-Ned_Flanders.png);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 

@@ -16,7 +16,8 @@ function Game () {
 
 
 Game.prototype.start = function() {
-  window.setTimeout(this.increaseVelocity(),10000);
+  
+
   this.gameScreen = buildDOM(`
   <main id="main-game">
     <header id="header-game">
@@ -34,6 +35,7 @@ Game.prototype.start = function() {
   this.ctx = this.canvasElement.getContext('2d');
   this.scoreElement = this.gameScreen.querySelector('.score');
   
+  window.setTimeout(this.increaseVelocity,10000);
   this.startLoop();
   this.startTimer();
 }
