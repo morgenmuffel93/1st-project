@@ -18,10 +18,11 @@ function Ball(canvas, type, velocity) {
   this.badBallsChoices = ["images/salad1.png","images/apple.png","images/broccoli.png","images/smoothie.png"];
   this.goodBallImage.src = this.goodBallsChoices[Math.floor(Math.random() * this.goodBallsChoices.length)];
   this.badBallImage.src = this.badBallsChoices[Math.floor(Math.random() * this.badBallsChoices.length)];
-  this.bombBallImage.src = 'images/flanders1.png';
+  this.bombBallImage.src = 'images/flandersnewnew.png';
 }
 
 Ball.prototype.update = function () {
+  
   if ((this.x + this.size) >= this.canvas.width) {
     this.velX = -(this.velX);
   }

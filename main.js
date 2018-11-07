@@ -23,15 +23,17 @@ function main() {
         <h1 id="h1-splash">Homer is hungry!</h1>
         <p class="text-splash">Help him catch the foods he enjoys while avoiding healthy items...<br>...and Flanders. Stupid Flanders.</p>
         <button id="btn-splash">Start</button>
+        <audio class="soundtrack"><source src="audio/The Simpsons.mp3" type="audio/mp3" /></audio>
       </main>
     `)
 
     document.body.prepend(splashScreen);
 
     startButton = document.querySelector('button');
-
     startButton.addEventListener('click', destroySplash);
-
+    var audioElement = new Audio("audio/The Simpsons.mp3");
+    //this.audioElement = this.gameScreen.querySelector('.soundtrack');
+    audioElement.play();
   }
 
   function destroySplash() {

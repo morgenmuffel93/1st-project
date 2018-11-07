@@ -7,11 +7,15 @@ function Game () {
   this.dotsArray = [];
   this.time = 20;
   this.gameIsOver = false;
+  this.isPaused = false;
   this.score = 0;
   this.isDrawing = false;
   this.mousex = 0;
   this.mousey = 0;
-  this.ballsVelocity = 2;
+  this.ballsVelocity = 3;
+  this.pointsSound = new Audio("audio/ding.wav");
+  this.enemiesSound = new Audio("audio/doh.wav");
+  this.maxBombs = 1;
 }
 
 
@@ -25,7 +29,6 @@ Game.prototype.start = function() {
       <p class="text-game">Time: <span class="time"></span></p>
     </header>
     <canvas width="800px" height="500px"></canvas>
-    <audio class="soundtrack"><source src="audio/The Simpsons.mp3" type="audio/mp3" /></audio>
   </main>
 `);
 
@@ -34,24 +37,23 @@ Game.prototype.start = function() {
   this.canvasElement = document.querySelector('canvas')
   this.ctx = this.canvasElement.getContext('2d');
   this.scoreElement = this.gameScreen.querySelector('.score');
+
+
   
-  window.setTimeout(this.increaseVelocity,10000);
   this.startLoop();
   this.startTimer();
+
 }
 
 Game.prototype.startLoop = function() {
-
-  //this.canvasElement.addEventListener('mousedown', this.handleMouseDown.bind(this));
   this.canvasElement.addEventListener('mousemove', this.handleMouseMove.bind(this));
-  //this.canvasElement.addEventListener('mouseup', this.handleMouseUp.bind(this));
-
-    
+  window.setTimeout(this.increaseVelocity.bind(this),10000);
 
     var loop = function() {
       if (Math.random() > 0.10) {
         this.updateDots(this.dotsArray);
       }
+    
     this.scoreElement.innerText = this.score;
     if (this.goodBalls.length < 6) {
       this.goodBalls.push(new Ball(this.canvasElement, 'good', this.ballsVelocity));
@@ -70,7 +72,7 @@ Game.prototype.startLoop = function() {
     }
  
 
-    this.updateAll();
+    this.updateAll(this.ballsVelocity);
     this.clearAll();
     this.drawAll();
 
@@ -84,7 +86,7 @@ Game.prototype.startLoop = function() {
 }
 
 Game.prototype.startTimer = function() {
-
+  
   this.timeElement.innerText = this.time;
 
    this.intervalId = setInterval(function() {
@@ -93,6 +95,7 @@ Game.prototype.startTimer = function() {
 
     if (this.time ===  0) {
       clearInterval(this.intervalId);
+      clearInterval(this.intervalId2);
       this.gameIsOver = true;
       this.finishGame();
     }
@@ -101,11 +104,19 @@ Game.prototype.startTimer = function() {
 }
 
 Game.prototype.increaseVelocity = function () {
-  if (this.time === 20) {
-    this.ballsVelocity = 3;
-  } else if (this.time === 10) {
-    this.ballsVelocity = 4;
-  }
+  this.bombBalls.push(new Ball(this.canvasElement, 'bomb', 5));
+  this.goodBalls.forEach(function(ball) {
+      ball.velX=5;
+      ball.velY=5;
+    })
+    this.badBalls.forEach(function(ball) {
+      ball.velX=5;
+      ball.velY=5;
+    })
+    this.bombBalls.forEach(function(ball) {
+      ball.velX=5;
+      ball.velY=5;
+    })
 }
 
 Game.prototype.drawAll = function() {
@@ -151,6 +162,7 @@ Game.prototype.isCollision = function(position) {
   if (distance < ball.size) {
     this.goodBalls.splice(index, 1);
     this.score++;
+    this.pointsSound.play();
   }
   }.bind(this));
 
@@ -162,6 +174,7 @@ Game.prototype.isCollision = function(position) {
     if (distance < ball.size) {
       this.badBalls.splice(index, 1);
       this.score = this.score - 5;
+      this.enemiesSound.play();
     }
     }.bind(this));
 
@@ -173,6 +186,7 @@ Game.prototype.isCollision = function(position) {
       if (distance < ball.size) {
         clearInterval(this.intervalId);
         this.gameIsOver = true;
+        clearInterval(this.intervalId2);
         this.finishGameFlanders();
       }
       }.bind(this));
@@ -187,9 +201,6 @@ function getMousePos(canvas, evt) {
   };
 }
 
-/* Game.prototype.handleMouseDown = function() {
-  this.isDrawing = true;
-};*/
 
 Game.prototype.handleMouseMove = function(event) {
   this.isDrawing = true;
@@ -200,12 +211,6 @@ Game.prototype.handleMouseMove = function(event) {
     this.isCollision(position);
   }
 };
-
-/* Game.prototype.handleMouseUp = function() {
-  this.isDrawing = false;
-  this.updateLine();
-  //line.ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
-};*/
 
 Game.prototype.updateLine = function() {
     this.dotsArray = 0;
