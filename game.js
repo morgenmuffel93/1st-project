@@ -12,8 +12,8 @@ function Game () {
   this.isDrawing = false;
   this.mousex = 0;
   this.mousey = 0;
-  this.pointsSound = new Audio("audio/ding.wav");
-  this.enemiesSound = new Audio("audio/doh.wav");
+  this.pointsSound = new Audio('./audio/ding.wav');
+  this.enemiesSound = new Audio('./audio/doh.wav');
   this.lives=5;
   this.message='';
   this.intervalId;
