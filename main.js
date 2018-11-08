@@ -12,28 +12,34 @@ function main() {
   var gameScreen;
   var gameOverScreen;
   var gameFlandersScreen;
+  var gameWinScreen;
   var startButton;
   var restartButton;
   var restartButtonFlanders;
+  var restartButtonWin;
   var canvasElement;
+  var scoreElement;
+  var gameInstructionsScreen;
+  var instructionsButton;
+  var backButton;
   
   function buildSplash() {
     splashScreen = buildDOM(`
-      <main id="main-splash">
-        <h1 id="h1-splash">Homer is hungry!</h1>
+      <main class="main-splash">
+        <h1 class="h1-splash">Homer is hungry!</h1>
         <p class="text-splash">Help him catch the foods he enjoys while avoiding healthy items...<br>...and Flanders. Stupid Flanders.</p>
-        <button id="btn-splash">Start</button>
-        <audio class="soundtrack"><source src="audio/The Simpsons.mp3" type="audio/mp3" /></audio>
+        <button class="btn-splash">Start</button>
+        <button class="btn-instructions">Instructions</button>
+        <audio autoplay="autoplay"><source src="audio/TheSimpsons.mp3" type="audio/mp3" /></audio>
       </main>
     `)
 
     document.body.prepend(splashScreen);
 
-    startButton = document.querySelector('button');
+    startButton = document.querySelector('.btn-splash');
     startButton.addEventListener('click', destroySplash);
-    var audioElement = new Audio("audio/The Simpsons.mp3");
-    //this.audioElement = this.gameScreen.querySelector('.soundtrack');
-    audioElement.play();
+    instructionsButton = document.querySelector('.btn-instructions');
+    instructionsButton.addEventListener('click', destroySplashInstructions);
   }
 
   function destroySplash() {
@@ -42,31 +48,64 @@ function main() {
     buildGameScreen();
   }
 
+  function destroySplashInstructions() {
+    splashScreen.remove();
+    startButton.removeEventListener('click', destroySplash);
+    buildInstructionsScreen();
+  }
+
+  function buildInstructionsScreen() {
+    gameInstructionsScreen = buildDOM(`
+    <main class="main-instructions">
+      <h1 class="h1-over">Instructions</h1>
+      <p class="scored-par">Blablabla</p>
+      <button class="btn-over">Back</button>
+    </main>  
+  `);
+
+  document.body.prepend(gameInstructionsScreen);
+
+  backButton = document.querySelector('button');
+  backButton.addEventListener('click', destroyGameInstructionsScreen)
+
+  }
+
+  function destroyGameInstructionsScreen() {
+    gameInstructionsScreen.remove();
+    buildSplash();
+  }
+
   function buildGameScreen() {
     
     var game = new Game();
     game.start();
     game.setGameOverCallback(buildGameOverScreen);
-    game.setGameFlandersCallback(buildGameFlandersScreen);
 
+    game.setGameFlandersCallback(buildGameFlandersScreen);
+    
+    game.setGameWinCallback(buildGameWinScreen);
   }
 
   function destroyGameFlandersScreen() {
     buildGameFlandersScreen();
   }
 
+  function destroyGameWinScreen() {
+    buildGameWinScreen();
+  }
+
   function buildGameOverScreen() {
     gameOverScreen = buildDOM(`
-      <main id="main-over">
-        <h1 id="h1-over">Game Over</h1>
-        <p class="scored-par"><span class="score"></span></p>
-        <button id="btn-over">Restart</button>
+      <main class="main-over">
+        <h1 class="h1-over">Game Over</h1>
+        <p class="scored-par">You scored <span class="score"></span> points</p>
+        <button class="btn-over">Restart</button>
       </main>  
     `);
 
     document.body.prepend(gameOverScreen);
 
-    //scoreElement = document.querySelector('.score');
+    scoreElement = document.querySelector('span');
     //scoreElement.innerText = game.score;
     restartButton = document.querySelector('button');
     restartButton.addEventListener('click', destroyGameOverScreen)
@@ -74,16 +113,16 @@ function main() {
 
   function buildGameFlandersScreen() {
     gameFlandersScreen = buildDOM(`
-      <main id="main-flanders">
-        <h1 id="h1-over">Game Over</h1>
+      <main class="main-flanders">
+        <h1 class="h1-flanders">Game Over</h1>
         <p class="flanders-text">Knock knock! It's your favorite neighbour...</p>
-        <button id="btn-over">Restart</button>
+        <button class="btn-flanders">Restart</button>
       </main>  
     `);
 
     document.body.prepend(gameFlandersScreen);
 
-    //scoreElement = document.querySelector('.score');
+    scoreElement = document.querySelector('.score');
     //scoreElement.innerText = game.score;
     restartButtonFlanders = document.querySelector('button');
     restartButtonFlanders.addEventListener('click', destroyGameFlandersScreen)
@@ -91,7 +130,27 @@ function main() {
 
   }
 
+  function buildGameWinScreen() {
+    gameWinScreen = buildDOM(`
+      <main class="main-win">
+        <h1 class="h1-win">You won!</h1>
+        <p class="win-text">Your score is <span class="score"></span></p>
+        <button class="btn-over-win">Restart</button>
+      </main>  
+    `);
+
+    document.body.prepend(gameWinScreen);
+
+    scoreElement = document.querySelector('.score');
+    //scoreElement.innerText = game.score;
+    restartButtonWin = document.querySelector('button');
+    restartButtonWin.addEventListener('click', destroyGameWinScreen)
+  }
+
+
+
   function destroyGameOverScreen() {
+    debugger
     gameOverScreen.remove();
     restartButton.removeEventListener('click', destroyGameOverScreen)
     buildGameScreen();
@@ -100,6 +159,12 @@ function main() {
   function destroyGameFlandersScreen() {
     gameFlandersScreen.remove();
     restartButtonFlanders.removeEventListener('click', destroyGameFlandersScreen)
+    buildGameScreen();
+  }
+
+  function destroyGameWinScreen() {
+    gameWinScreen.remove();
+    restartButtonWin.removeEventListener('click', destroyGameWinScreen)
     buildGameScreen();
   }
 
