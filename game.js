@@ -5,7 +5,7 @@ function Game () {
   this.badBalls = [];
   this.bombBalls = [];
   this.dotsArray = [];
-  this.time = 30;
+  this.time = 300;
   this.gameIsOver = false;
   this.isPaused = false;
   this.score = 0;
