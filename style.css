@@ -25,10 +25,10 @@ button {
   align-items: center;
   height: 100%;
   width: 100%;
-  padding-top: 218px;
-  padding-bottom: 218px;
   background-image: url(images/splash-background.jpeg);
   background-size: cover;
+  position: fixed;
+  justify-content: center;
 }
 
 #h1-splash {
@@ -68,24 +68,26 @@ button {
   flex-direction: row-reverse;
   align-items: center;
   justify-content: space-around;
-  background-image: url(images/game-background.jpg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  padding: 30px 100px 150px 30px;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  padding: 0px 30px 0px 30px;
+
 }
 
 .text-game {
-  color: white;
+  color: rgb(112, 209, 254);
 }
 
 canvas {
-  border: 1px solid white;
-  background-image: url(images/simpsons-kitchen.0.0.jpg);
+  border: 3px dashed rgb(93, 103, 119);
+  background-image: url(images/kitchen.png);
 }
 
 #header-game {
   width: 40%;
-  align-self: flex-start;
+  align-self: center;
   padding-left: 30px;
   font-size: 20px;
   font-weight: bold;
@@ -98,9 +100,9 @@ canvas {
   align-items: center;
   height: 100%;
   width: 100%;
-  padding-top: 218px;
-  padding-bottom: 218px;
   background-image: url(images/splash-background.jpeg);
+  position: fixed;
+  justify-content: center;
 }
 
 #main-flanders {
@@ -109,11 +111,11 @@ canvas {
   align-items: center;
   height: 100%;
   width: 100%;
-  padding-top: 218px;
-  padding-bottom: 218px;
-  background-image: url(images/220px-Ned_Flanders.png);
+  background-image: url(images/newflandersover.png);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+  position: fixed;
+  justify-content: center;
 }
 
 
@@ -125,19 +127,25 @@ canvas {
   font-weight: bold;
 }
 
+.flanders-text {
+  font-size: 30px;
+  font-weight: bold;
+}
 
 #btn-over {
   font-family: 'Roboto Mono', monospace;
-  background: white;
+  
   font-size: 30px;
   padding: 0px 30px;
   width: 20%;
   border-style: none;
-  color: rgb(146, 212, 247)
+  background: white;
+  color: rgb(209, 157, 50)
 }
 
 #btn-over:hover {
-  background-color:  #fcffbf;
+  background: rgb(209, 157, 50);
+  color: white;
 }
 
 .scored-par {

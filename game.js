@@ -5,7 +5,7 @@ function Game () {
   this.badBalls = [];
   this.bombBalls = [];
   this.dotsArray = [];
-  this.time = 20;
+  this.time = 30;
   this.gameIsOver = false;
   this.isPaused = false;
   this.score = 0;
@@ -16,17 +16,19 @@ function Game () {
   this.pointsSound = new Audio("audio/ding.wav");
   this.enemiesSound = new Audio("audio/doh.wav");
   this.maxBombs = 1;
+  this.lives=3;
 }
 
 
 Game.prototype.start = function() {
   
-
   this.gameScreen = buildDOM(`
   <main id="main-game">
     <header id="header-game">
+      <p class="text-game">Lives: <span class="lives"></span></p>
       <p class="text-game">Score: <span class="score"></span></p>
       <p class="text-game">Time: <span class="time"></span></p>
+      <img src="images/homerdrool.jpg"/>
     </header>
     <canvas width="800px" height="500px"></canvas>
   </main>
@@ -37,9 +39,8 @@ Game.prototype.start = function() {
   this.canvasElement = document.querySelector('canvas')
   this.ctx = this.canvasElement.getContext('2d');
   this.scoreElement = this.gameScreen.querySelector('.score');
+  this.livesElement = this.gameScreen.querySelector('.lives');
 
-
-  
   this.startLoop();
   this.startTimer();
 
@@ -48,6 +49,7 @@ Game.prototype.start = function() {
 Game.prototype.startLoop = function() {
   this.canvasElement.addEventListener('mousemove', this.handleMouseMove.bind(this));
   window.setTimeout(this.increaseVelocity.bind(this),10000);
+  window.setTimeout(this.increaseVelocity2.bind(this),20000);
 
     var loop = function() {
       if (Math.random() > 0.10) {
@@ -55,6 +57,8 @@ Game.prototype.startLoop = function() {
       }
     
     this.scoreElement.innerText = this.score;
+    this.livesElement.innerText = this.lives;
+    
     if (this.goodBalls.length < 6) {
       this.goodBalls.push(new Ball(this.canvasElement, 'good', this.ballsVelocity));
     }
@@ -93,7 +97,7 @@ Game.prototype.startTimer = function() {
     this.time--;
     this.timeElement.innerText = this.time;
 
-    if (this.time ===  0) {
+    if (this.lives ===  0 || this.time === 0) {
       clearInterval(this.intervalId);
       clearInterval(this.intervalId2);
       this.gameIsOver = true;
@@ -105,6 +109,7 @@ Game.prototype.startTimer = function() {
 
 Game.prototype.increaseVelocity = function () {
   this.bombBalls.push(new Ball(this.canvasElement, 'bomb', 5));
+  this.ballsVelocity=5;
   this.goodBalls.forEach(function(ball) {
       ball.velX=5;
       ball.velY=5;
@@ -116,6 +121,23 @@ Game.prototype.increaseVelocity = function () {
     this.bombBalls.forEach(function(ball) {
       ball.velX=5;
       ball.velY=5;
+    })
+}
+
+Game.prototype.increaseVelocity2 = function () {
+  this.ballsVelocity=6;
+  this.bombBalls.push(new Ball(this.canvasElement, 'bomb', 6));
+  this.goodBalls.forEach(function(ball) {
+      ball.velX=6;
+      ball.velY=6;
+    })
+    this.badBalls.forEach(function(ball) {
+      ball.velX=6;
+      ball.velY=6;
+    })
+    this.bombBalls.forEach(function(ball) {
+      ball.velX=6;
+      ball.velY=6;
     })
 }
 
@@ -173,7 +195,7 @@ Game.prototype.isCollision = function(position) {
   
     if (distance < ball.size) {
       this.badBalls.splice(index, 1);
-      this.score = this.score - 5;
+      this.lives--;
       this.enemiesSound.play();
     }
     }.bind(this));
