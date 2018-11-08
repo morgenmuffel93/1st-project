@@ -7,7 +7,7 @@ function Message (canvas, text) {
 }
 
 Message.prototype.draw = function () {
-  this.ctx.font = "60px 'Roboto Mono'"
+  this.ctx.font = "60px 'Indie Flower'"
   this.ctx.fillStyle = "#222"
   this.ctx.fillText(this.text, this.x, this.y);
 }

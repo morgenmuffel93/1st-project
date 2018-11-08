@@ -57,9 +57,10 @@ function main() {
   function buildInstructionsScreen() {
     gameInstructionsScreen = buildDOM(`
     <main class="main-instructions">
-      <h1 class="h1-over">Instructions</h1>
-      <p class="scored-par">Blablabla</p>
-      <button class="btn-over">Back</button>
+      <h1 class="h1-instructions">Instructions</h1>
+      <p class="instructions-par">Use the mouse to move over the objects you want to catch. <br>The game is over when you lose all your lives, time is up or you catch Flanders.<br> Score 20 to win!</p>
+      <img class="ins-img" src="images/instructions.png">
+      <button class="btn-back">Back</button>
     </main>  
   `);
 
@@ -150,7 +151,6 @@ function main() {
 
 
   function destroyGameOverScreen() {
-    debugger
     gameOverScreen.remove();
     restartButton.removeEventListener('click', destroyGameOverScreen)
     buildGameScreen();

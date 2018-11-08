@@ -136,6 +136,14 @@ canvas {
   font-weight: bold;
 }
 
+.h1-instructions {
+  font-size: 60px;
+  margin: 0;
+  font-family: 'Indie Flower', cursive;
+  color: rgb(146, 212, 247);
+  font-weight: bold;
+}
+
 .flanders-text {
   font-size: 30px;
   font-weight: bold;
@@ -171,7 +179,12 @@ canvas {
 
 
 .scored-par {
+  font-size: 15px;
+}
+
+.instructions-par {
   font-size: 20px;
+  text-align: center;
 }
 
 .h1-win {
@@ -239,5 +252,36 @@ canvas {
 }
 
 .btn-instructions:hover {
+  background-color:  #fcffbf;
+}
+
+.ins-img {
+  max-width: 50%;
+  max-height: 50%;
+}
+
+.main-instructions {
+  width: 100;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-size: cover;
+  position: fixed;
+  justify-content: center;
+}
+
+.btn-back {
+  font-family: 'Roboto Mono', monospace;
+  background: white;
+  font-size: 30px;
+  padding: 0px 30px;
+  border-style: none;
+  color: rgb(146, 212, 247);
+  margin-top: 10px;
+  
+}
+
+.btn-back:hover {
   background-color:  #fcffbf;
 }
