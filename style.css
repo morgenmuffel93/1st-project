@@ -161,11 +161,11 @@ canvas {
   padding: 0px 30px;
   border-style: none;
   background: white;
-  color: rgb(209, 157, 50)
+  color: rgb(91, 148, 193);
 }
 
 .btn-flanders:hover {
-  background: rgb(209, 157, 50);
+  background: rgb(91, 148, 193);
   color: white;
 }
 
@@ -193,12 +193,12 @@ canvas {
   padding: 0px 30px;
   border-style: none;
   background: white;
-  color: rgb(209, 157, 50);
+  color: rgb(91, 148, 193);
   margin-left: 400px;
 }
 
 .btn-over-win:hover {
-  background: rgb(209, 157, 50);
+  background: rgb(91, 148, 193);
   color: white;
 }
 
