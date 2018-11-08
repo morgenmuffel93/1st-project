@@ -92,6 +92,12 @@ Game.prototype.startLoop = function() {
       this.finishGame();
     }
 
+    if (this.score ===  20) {
+      clearInterval(this.intervalId);
+      this.gameIsOver = true;
+      this.finishGameWin();
+    }
+
     if (!this.gameIsOver) {
       requestAnimationFrame(loop);
     }
@@ -114,7 +120,7 @@ Game.prototype.startTimer = function() {
     if (this.time === 0) {
       clearInterval(this.intervalId);
       this.gameIsOver = true;
-      this.finishGameWin();
+      this.finishGame();
     }
 
   }.bind(this), 1000)

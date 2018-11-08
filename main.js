@@ -98,7 +98,7 @@ function main() {
     gameOverScreen = buildDOM(`
       <main class="main-over">
         <h1 class="h1-over">Game Over</h1>
-        <p class="scored-par">You scored <span class="score"></span> points</p>
+        <p class="scored-par"><span class="score"></span></p>
         <button class="btn-over">Restart</button>
       </main>  
     `);
@@ -134,7 +134,7 @@ function main() {
     gameWinScreen = buildDOM(`
       <main class="main-win">
         <h1 class="h1-win">You won!</h1>
-        <p class="win-text">Your score is <span class="score"></span></p>
+        <p class="win-text"><span class="score"></span></p>
         <button class="btn-over-win">Restart</button>
       </main>  
     `);
