@@ -30,6 +30,8 @@ Game.prototype.start = function() {
       <p class="text-game">Score: <span class="score"></span></p>
       <p class="text-game">Time: <span class="time"></span></p>
       <img src="images/homerdrool.jpg"/>
+      <span id="audio1"></span>
+      <span id="audio2"></span>
     </header>
     <canvas></canvas>
   </main>
@@ -43,6 +45,11 @@ Game.prototype.start = function() {
   this.ctx = this.canvasElement.getContext('2d');
   this.scoreElement = this.gameScreen.querySelector('.score');
   this.livesElement = this.gameScreen.querySelector('.lives');
+  var audio1Element = document.querySelector('#audio1');
+  audio1Element.innerHTML='<audio autoplay><source src="./audio/Ding.mp3"></audio>';
+
+  var audio2Element = document.querySelector('#audio2');
+  audio2Element.innerHTML='<audio autoplay><source src="./audio/Doh.mp3"></audio>';
 
   this.startLoop();
   this.startTimer();
