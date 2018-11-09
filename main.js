@@ -120,6 +120,7 @@ function main() {
 
     document.body.prepend(gameFlandersScreen);
     audioElementFlanders = gameFlandersScreen.querySelector('.audio');
+    audioElementFlanders.volume = 1;
     audioElementFlanders.play();
     restartButtonFlanders = document.querySelector('button');
     restartButtonFlanders.addEventListener('click', destroyGameFlandersScreen)

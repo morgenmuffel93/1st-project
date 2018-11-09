@@ -31,7 +31,7 @@ Game.prototype.start = function() {
       <p class="text-game">Score: <span class="score"></span></p>
       <p class="text-game">Time: <span class="time"></span></p>
       <img src="images/homerdrool.jpg"/>
-      <audio src="audio/SimpsonsPixels.mp3" class="audio"></audio>
+      <audio src="audio/SimpsonsPixelsdown.mp3" class="audio"></audio>
     </header>
     <canvas></canvas>
   </main>
@@ -39,7 +39,7 @@ Game.prototype.start = function() {
 
   document.body.prepend(this.gameScreen);
   this.audioElement = this.gameScreen.querySelector('.audio');
-  this.audioElement.volume = 0.5;
+  this.audioElement.volume = 0.3;
   this.audioElement.play();
   this.timeElement = this.gameScreen.querySelector('.time')
   this.canvasElement = document.querySelector('canvas')
