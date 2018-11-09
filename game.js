@@ -228,6 +228,7 @@ Game.prototype.isCollision = function(position) {
     this.goodBalls.splice(index, 1);
     this.score++;
     this.pointsSound.play();
+    this.pointsSound.volume = 0.5;
   }
   }.bind(this));
 
@@ -240,6 +241,7 @@ Game.prototype.isCollision = function(position) {
       this.badBalls.splice(index, 1);
       this.lives--;
       this.enemiesSound.play();
+      this.enemiesSound.volume=0.5;
     }
     }.bind(this));
 
