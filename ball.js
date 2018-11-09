@@ -2,7 +2,7 @@
 
 function Ball(canvas, type, maxVelocity) {
   this.colors = ['lightblue','lightpink','yellow','lightgreen'];
-  this.canvas = canvas; //ven de game
+  this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
   this.size = Math.floor(Math.random() * (90-90+1)+90);
   this.x = Math.floor(Math.random() * ((this.canvas.width-this.size)-this.size+1)+this.size);
@@ -58,8 +58,4 @@ Ball.prototype.draw = function () {
   }
 }
 
-Ball.prototype.incrementSpeed = function() {
-  ball.velX = 3;
-  ball.velY = 3;
-}
 

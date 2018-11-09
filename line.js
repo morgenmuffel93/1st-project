@@ -13,8 +13,6 @@ function Line(canvas, x, y) {
 Line.prototype.drawDot = function(x, y) {
   this.ctx.beginPath();
   this.ctx.arc(x, y, 6, 0, 2 * Math.PI);
-  //this.ctx.fillStyle = this.color;
-  //this.ctx.fill();
   this.ctx.drawImage(this.lineImage, this.x, this.y, 36, 36);
 };
 

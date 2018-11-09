@@ -18,7 +18,6 @@ function main() {
   var restartButtonFlanders;
   var restartButtonWin;
   var canvasElement;
-  var scoreElement;
   var gameInstructionsScreen;
   var instructionsButton;
   var backButton;
@@ -105,9 +104,6 @@ function main() {
     `);
 
     document.body.prepend(gameOverScreen);
-
-    scoreElement = document.querySelector('span');
-    //scoreElement.innerText = game.score;
     restartButton = document.querySelector('button');
     restartButton.addEventListener('click', destroyGameOverScreen)
   }
@@ -141,9 +137,6 @@ function main() {
     `);
 
     document.body.prepend(gameWinScreen);
-
-    scoreElement = document.querySelector('.score');
-    //scoreElement.innerText = game.score;
     restartButtonWin = document.querySelector('button');
     restartButtonWin.addEventListener('click', destroyGameWinScreen)
   }
