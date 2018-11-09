@@ -227,7 +227,8 @@ Game.prototype.isCollision = function(position) {
   if (distance < ball.size) {
     this.goodBalls.splice(index, 1);
     this.score++;
-    this.pointsSound.volume = 1;
+    this.pointsSound.currentTime=0;
+    this.pointsSound.volume = 0.5;
     this.pointsSound.play();
   }
   }.bind(this));
@@ -240,7 +241,8 @@ Game.prototype.isCollision = function(position) {
     if (distance < ball.size) {
       this.badBalls.splice(index, 1);
       this.lives--;
-      this.enemiesSound.volume=1;
+      this.pointsSound.currentTime=0;
+      this.enemiesSound.volume=0.5;
       this.enemiesSound.play();
       
     }
