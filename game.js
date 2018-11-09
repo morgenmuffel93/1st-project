@@ -12,12 +12,12 @@ function Game () {
   this.isDrawing = false;
   this.mousex = 0;
   this.mousey = 0;
-  this.pointsSound = new Audio('/audio/Ding.mp3');
-  this.enemiesSound = new Audio('/audio/Doh.mp3');
   this.lives=5;
   this.message='';
   this.intervalId;
   this.maxVelocity = 3;
+  this.pointsSound = new Audio('https://morgenmuffel93.github.io/Cutting-board/audio/Ding.mp3');
+  this.enemiesSound = new Audio('https://morgenmuffel93.github.io/Cutting-board/audio/Doh.mp3');
 }
 
 
@@ -57,6 +57,7 @@ Game.prototype.start = function() {
 }
 
 Game.prototype.startLoop = function() {
+
   this.canvasElement.addEventListener('mousemove', this.handleMouseMove.bind(this));
   window.setTimeout(this.increaseVelocity.bind(this),10000);
   window.setTimeout(this.increaseVelocity2.bind(this),20000);
