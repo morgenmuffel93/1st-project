@@ -45,11 +45,11 @@ Game.prototype.start = function() {
   this.ctx = this.canvasElement.getContext('2d');
   this.scoreElement = this.gameScreen.querySelector('.score');
   this.livesElement = this.gameScreen.querySelector('.lives');
-  var audio1Element = document.querySelector('#audio1');
-  audio1Element.innerHTML='<audio autoplay><source src="./audio/Ding.mp3"></audio>';
+  //var audio1Element = document.querySelector('#audio1');
+  //audio1Element.innerHTML='<audio autoplay><source src="./audio/Ding.mp3"></audio>';
 
-  var audio2Element = document.querySelector('#audio2');
-  audio2Element.innerHTML='<audio autoplay><source src="./audio/Doh.mp3"></audio>';
+  //var audio2Element = document.querySelector('#audio2');
+  //audio2Element.innerHTML='<audio autoplay><source src="./audio/Doh.mp3"></audio>';
 
   this.startLoop();
   this.startTimer();
@@ -227,8 +227,8 @@ Game.prototype.isCollision = function(position) {
   if (distance < ball.size) {
     this.goodBalls.splice(index, 1);
     this.score++;
+    this.pointsSound.volume = 1;
     this.pointsSound.play();
-    this.pointsSound.volume = 0.5;
   }
   }.bind(this));
 
@@ -240,8 +240,9 @@ Game.prototype.isCollision = function(position) {
     if (distance < ball.size) {
       this.badBalls.splice(index, 1);
       this.lives--;
+      this.enemiesSound.volume=1;
       this.enemiesSound.play();
-      this.enemiesSound.volume=0.5;
+      
     }
     }.bind(this));
 
