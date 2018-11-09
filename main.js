@@ -30,12 +30,11 @@ function main() {
         <p class="text-splash">Help him catch the foods he enjoys while avoiding healthy items...<br>...and Flanders. Stupid Flanders.</p>
         <button class="btn-splash">Start</button>
         <button class="btn-instructions">Instructions</button>
-        <audio autoplay="autoplay"><source src="audio/TheSimpsons.mp3" type="audio/mp3" /></audio>
+        <audio autoplay="autoplay" muted="muted"><source src="audio/TheSimpsons.mp3" type="audio/mp3"/></audio>
       </main>
     `)
 
     document.body.prepend(splashScreen);
-
     startButton = document.querySelector('.btn-splash');
     startButton.addEventListener('click', destroySplash);
     instructionsButton = document.querySelector('.btn-instructions');
