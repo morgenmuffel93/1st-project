@@ -22,6 +22,7 @@ function main() {
   var gameInstructionsScreen;
   var instructionsButton;
   var backButton;
+  var audioElementFlanders;
   
   function buildSplash() {
     splashScreen = buildDOM(`
@@ -30,7 +31,7 @@ function main() {
         <p class="text-splash">Help him catch the foods he enjoys while avoiding healthy items...<br>...and Flanders. Stupid Flanders.</p>
         <button class="btn-splash">Start</button>
         <button class="btn-instructions">Instructions</button>
-        <audio autoplay="autoplay" muted="muted"><source src="audio/TheSimpsons.mp3" type="audio/mp3"/></audio>
+        <audio src="audio/TheSimpsons.mp3" class="audio"></audio>
       </main>
     `)
 
@@ -117,13 +118,13 @@ function main() {
         <h1 class="h1-flanders">Game Over</h1>
         <p class="flanders-text">Knock knock! It's your favorite neighbour...</p>
         <button class="btn-flanders">Restart</button>
+        <audio src="audio/vecinito.mp3" class="audio"></audio>
       </main>  
     `);
 
     document.body.prepend(gameFlandersScreen);
-
-    scoreElement = document.querySelector('.score');
-    //scoreElement.innerText = game.score;
+    audioElementFlanders = gameFlandersScreen.querySelector('.audio');
+    audioElementFlanders.play();
     restartButtonFlanders = document.querySelector('button');
     restartButtonFlanders.addEventListener('click', destroyGameFlandersScreen)
     

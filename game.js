@@ -18,6 +18,7 @@ function Game () {
   this.maxVelocity = 3;
   this.pointsSound = new Audio('https://morgenmuffel93.github.io/Cutting-board/audio/Ding.mp3');
   this.enemiesSound = new Audio('https://morgenmuffel93.github.io/Cutting-board/audio/Doh.mp3');
+  this.audioElement;
 }
 
 
@@ -30,12 +31,15 @@ Game.prototype.start = function() {
       <p class="text-game">Score: <span class="score"></span></p>
       <p class="text-game">Time: <span class="time"></span></p>
       <img src="images/homerdrool.jpg"/>
+      <audio src="audio/SimpsonsPixels.mp3" class="audio"></audio>
     </header>
     <canvas></canvas>
   </main>
 `);
 
   document.body.prepend(this.gameScreen);
+  this.audioElement = this.gameScreen.querySelector('.audio');
+  this.audioElement.play();
   this.timeElement = this.gameScreen.querySelector('.time')
   this.canvasElement = document.querySelector('canvas')
   this.canvasElement.width = 800;
@@ -221,7 +225,7 @@ Game.prototype.isCollision = function(position) {
     this.goodBalls.splice(index, 1);
     this.score++;
     this.pointsSound.currentTime=0;
-    this.pointsSound.volume = 0.5;
+    this.pointsSound.volume = 1;
     this.pointsSound.play();
   }
   }.bind(this));
@@ -235,7 +239,7 @@ Game.prototype.isCollision = function(position) {
       this.badBalls.splice(index, 1);
       this.lives--;
       this.pointsSound.currentTime=0;
-      this.enemiesSound.volume=0.5;
+      this.enemiesSound.volume=1;
       this.enemiesSound.play();
       
     }
