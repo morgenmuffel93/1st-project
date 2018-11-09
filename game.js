@@ -39,6 +39,7 @@ Game.prototype.start = function() {
 
   document.body.prepend(this.gameScreen);
   this.audioElement = this.gameScreen.querySelector('.audio');
+  this.audioElement.volume = 0.5;
   this.audioElement.play();
   this.timeElement = this.gameScreen.querySelector('.time')
   this.canvasElement = document.querySelector('canvas')
